@@ -1,6 +1,25 @@
 ﻿#Region ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
 #AutoIt3Wrapper_Version=Beta
 #AutoIt3Wrapper_Icon=Obscura.ico
+#AutoIt3Wrapper_Outfile=Au3Obscura_Apple.exe
+#AutoIt3Wrapper_Compression=4
+#AutoIt3Wrapper_UseUpx=y
+#AutoIt3Wrapper_Res_Comment=Obscura — AutoIt 原始碼保護工具
+#AutoIt3Wrapper_Res_Description=Obscura — AutoIt 原始碼保護工具
+#AutoIt3Wrapper_Res_Fileversion=1.0.0.0
+#AutoIt3Wrapper_Res_ProductName=Obscura
+#AutoIt3Wrapper_Res_ProductVersion=2026.11.02
+#AutoIt3Wrapper_Res_CompanyName=格雷資訊
+#AutoIt3Wrapper_Res_LegalCopyright=grayfree.tw 2026 Unlicense.
+#AutoIt3Wrapper_Res_LegalTradeMarks=grayfree.tw
+#AutoIt3Wrapper_Res_requestedExecutionLevel=highestAvailable
+#AutoIt3Wrapper_Res_CLASS=gWinUI
+#AutoIt3Wrapper_Res_HiDpi=y
+#AutoIt3Wrapper_AU3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
+#EndRegion ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
+#Region ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
+#AutoIt3Wrapper_Version=Beta
+#AutoIt3Wrapper_Icon=Obscura.ico
 #AutoIt3Wrapper_OutFile=Au3Obscura_Apple.exe
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseUpx=y
@@ -246,6 +265,7 @@ Global $g_tBtnLastFallback = 0
 Global $g_scale = _DpiInit() ;;DPI 縮放倍率(96dpi=1.0)
 _DiagStart() ;;盡早建立獨立 LOG；即使切頁後立即閃退也保留前面的線索
 OnAutoItExitRegister("_DiagOnExit")
+_SciEnsureDll() ;;編譯版:若同資料夾沒有 Scintilla.dll,從 EXE 內釋放出來(FileInstall 在 _SciEnsureDll 內)
 ; 退回卡片前:強制亮色、不載入主題旗標
 _BuildGui()
 _Loop()
@@ -5063,6 +5083,16 @@ EndFunc   ;==>_ConvFromFile
 ; ========================= 內嵌 Scintilla(轉換輸出) =========================
 ; 載入 SciLexer.dll / Scintilla.dll(SciTE 用的編輯器核心)。載入即註冊 "Scintilla" 視窗類別。
 ; 開發(F5)時從 AutoIt 的 SciTE 資料夾載入;編譯後請把該 DLL 放在 EXE 同資料夾(或 FileInstall)。
+; ★ FileInstall 位置 ★ 編譯版把 Scintilla.dll 內嵌進 EXE,首次執行若同資料夾沒有就釋放出來。
+; FileInstall 的來源必須是編譯期字面常數:用相對路徑 "Scintilla.dll"(需與本腳本同資料夾)。
+; 未編譯(F5)時不處理:直接由 _SciInit 從同資料夾或 AutoIt 的 SciTE 資料夾載入。
+Func _SciEnsureDll()
+	If Not @Compiled Then Return
+	Local $dst = @ScriptDir & "\Scintilla.dll"
+	If FileExists($dst) Then Return
+	FileInstall("Scintilla.dll", @ScriptDir & "\Scintilla.dll", 1) ;;← FileInstall 就在這一行
+EndFunc   ;==>_SciEnsureDll
+
 Func _SciInit()
 	If $g_hSciDll Then Return True
 	Local $aCand[7] = [ _
