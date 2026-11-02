@@ -17,27 +17,6 @@
 #AutoIt3Wrapper_Res_HiDpi=y
 #AutoIt3Wrapper_AU3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
 #EndRegion ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
-#Region ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
-#AutoIt3Wrapper_Version=Beta
-#AutoIt3Wrapper_Icon=Obscura.ico
-#AutoIt3Wrapper_OutFile=Au3Obscura_Apple.exe
-#AutoIt3Wrapper_Compression=4
-#AutoIt3Wrapper_UseUpx=y
-#AutoIt3Wrapper_UseX64=n
-#AutoIt3Wrapper_Res_Comment=Obscura — AutoIt 原始碼保護工具
-#AutoIt3Wrapper_Res_Description=Obscura — AutoIt 原始碼保護工具
-#AutoIt3Wrapper_Res_Fileversion=1.0.0.0
-#AutoIt3Wrapper_Res_ProductName=Obscura
-#AutoIt3Wrapper_Res_ProductVersion=1.0.0.0
-#AutoIt3Wrapper_Res_CompanyName=格雷資訊
-#AutoIt3Wrapper_Res_LegalCopyright=grayfree.tw 2026 Unlicense.
-#AutoIt3Wrapper_Res_LegalTradeMarks=grayfree.tw
-#AutoIt3Wrapper_Res_Language=1028
-#AutoIt3Wrapper_Res_requestedExecutionLevel=highestAvailable
-#AutoIt3Wrapper_Res_CLASS=gWinUI
-#AutoIt3Wrapper_Res_HiDpi=y
-#AutoIt3Wrapper_AU3Check_Parameters=-d -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7
-#EndRegion ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
 #NoTrayIcon ;不顯示系統匣圖示
 #RequireAdmin ;請求管理員權限
 
