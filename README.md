@@ -15,6 +15,8 @@ Obscura 是 [格雷資訊 (grayfree.tw)](https://grayfree.tw) 開發的 AutoIt �
 
 ---
 
+<img width="1225" height="927" alt="2026-11-03_033524" src="https://github.com/user-attachments/assets/7362f3d1-df35-437f-aace-83f4c55171f6" />
+
 ## ✨ 功能特色
 
 ### 程式碼檢測
