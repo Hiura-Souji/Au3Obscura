@@ -1,9 +1,10 @@
-﻿#Region ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
+#Region ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
 #AutoIt3Wrapper_Version=Beta
 #AutoIt3Wrapper_Icon=Obscura.ico
-#AutoIt3Wrapper_Outfile=Au3Obscura.exe
+#AutoIt3Wrapper_OutFile=Au3Obscura.exe
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseUpx=y
+#AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=Obscura — AutoIt 原始碼保護工具
 #AutoIt3Wrapper_Res_Description=Obscura — AutoIt 原始碼保護工具
 #AutoIt3Wrapper_Res_Fileversion=1.0.0.0
@@ -12,6 +13,7 @@
 #AutoIt3Wrapper_Res_CompanyName=格雷資訊
 #AutoIt3Wrapper_Res_LegalCopyright=grayfree.tw 2026 Unlicense.
 #AutoIt3Wrapper_Res_LegalTradeMarks=grayfree.tw
+#AutoIt3Wrapper_Res_Language=1028
 #AutoIt3Wrapper_Res_requestedExecutionLevel=highestAvailable
 #AutoIt3Wrapper_Res_CLASS=gWinUI
 #AutoIt3Wrapper_Res_HiDpi=y
@@ -634,9 +636,14 @@ Func _AppleDlg($title, $text, $icon, ByRef $btns, $pri = 0)
 	Return $r
 EndFunc   ;==>_AppleDlg
 
-; 圖示來源:編譯後用 EXE 內嵌的圖示;未編譯時用同資料夾的 .ico
+; 圖示來源(給 GDI+ _GDIPlus_ImageLoadFromFile 用,必須是「圖檔路徑」)。
+; 未編譯:同資料夾的 Obscura.ico。
+; 編譯後:@AutoItExe 是 EXE 本身,GDI+ 無法當圖檔讀 → 先把內嵌的 Obscura.ico 釋放到暫存再回傳該路徑。
 Func _IcoSrc()
-	Return @Compiled ? @AutoItExe : @ScriptDir & "\Obscura.ico"
+	If Not @Compiled Then Return @ScriptDir & "\Obscura.ico"
+	Local $t = @TempDir & "\Obscura_rt.ico"
+	If Not FileExists($t) Then FileInstall("Obscura.ico", @TempDir & "\Obscura_rt.ico", 1) ;;來源為編譯期字面常數(需與腳本同資料夾)
+	Return $t
 EndFunc   ;==>_IcoSrc
 
 ; 以 GDI+ 載入圖示(可正確解碼 PNG 壓縮的 .ico 幀),先填底色消除透明黑邊,
