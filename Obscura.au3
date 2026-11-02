@@ -1,7 +1,7 @@
 ﻿#Region ;**** 由 AutoIt3Wrapper_GUI 建立的指令 ****
 #AutoIt3Wrapper_Version=Beta
 #AutoIt3Wrapper_Icon=Obscura.ico
-#AutoIt3Wrapper_Outfile=Au3Obscura_Apple.exe
+#AutoIt3Wrapper_Outfile=Au3Obscura.exe
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseUpx=y
 #AutoIt3Wrapper_Res_Comment=Obscura — AutoIt 原始碼保護工具
